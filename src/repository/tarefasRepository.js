@@ -24,8 +24,7 @@ export async function listarTarefasFinalizadas() {
                 WHERE BT_FINALIZADO = FALSE`
 }
 
-export async function alterarTarefa(tarefaId, newTarefa)
-{
+export async function alterarTarefa(tarefaId, newTarefa) {
     let sql = `UPDATE TB_TAREFA 
                   SET DS_TAREFA = ? AND
                       NR_ORDEM = ? AND
@@ -33,5 +32,14 @@ export async function alterarTarefa(tarefaId, newTarefa)
                       DT_CADASTRO = ?
                 WHERE ID_TAREFA = ?;`
 
-    let resposta = conexao.query(sql, []);
+    let resposta = await conexao.query(sql, [newTarefa.descricao, newTarefa.ordem, newTarefa.finalizado, newTarefa.dataCadastro, tarefaId]);
+    return resposta[0];
+}
+
+export async function deletarTarefa(tarefaID) {
+    let sql = `DELETE FROM TB_TAREFA
+                WHERE ID_TAREFA = ?`
+    
+    let resposta = await conexao.query(sql, [tarefaID]);
+    return resposta[0];
 }
