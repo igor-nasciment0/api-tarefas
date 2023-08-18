@@ -21,14 +21,17 @@ export async function inserirTarefa(tarefa) {
 
 export async function listarTarefasFinalizadas() {
     let sql = `SELECT * FROM TB_TAREFA 
-                WHERE BT_FINALIZADO = FALSE`
+                WHERE BT_FINALIZADO = TRUE`
+
+    let resposta = await conexao.query(sql);
+    return resposta[0];
 }
 
 export async function alterarTarefa(tarefaId, newTarefa) {
     let sql = `UPDATE TB_TAREFA 
-                  SET DS_TAREFA = ? AND
-                      NR_ORDEM = ? AND
-                      BT_FINALIZADO = ? AND
+                  SET DS_TAREFA = ?,
+                      NR_ORDEM = ?,
+                      BT_FINALIZADO = ?,
                       DT_CADASTRO = ?
                 WHERE ID_TAREFA = ?;`
 

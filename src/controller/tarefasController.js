@@ -15,12 +15,12 @@ endpoints.post('/tarefa', async (req, resp) => {
     resp.send(dados);
 })
 
-endpoints.get('/tarefas/finalizadas', async (req, resp) => {
+endpoints.get('/tarefa/finalizadas', async (req, resp) => {
     let dados = await listarTarefasFinalizadas();
     resp.send(dados);
 })
 
-endpoints.put('/tarefas/:id', async (req, resp) => {
+endpoints.put('/tarefa/:id', async (req, resp) => {
     let tarefaID = req.params.id;
     let newTarefa = req.body;
 
@@ -28,7 +28,7 @@ endpoints.put('/tarefas/:id', async (req, resp) => {
     resp.send(dados);
 })
 
-endpoints.delete('/tarefas/:id', async (req, resp) => {
+endpoints.delete('/tarefa/:id', async (req, resp) => {
     let tarefaID = req.params.id;
 
     let dados = await deletarTarefa(tarefaID);
